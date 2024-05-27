@@ -14,14 +14,14 @@ const Home = () => {
           className={`${passion_one.className} spark-home-heading mb-5 md:mb-10`}
         >
           Unleash your AI creativity and join the{" "}
-          <span className=" text-red-500">Spark</span> write{" "}
+          <span className=" text-[#FF6060]">Spark</span> write{" "}
           <span className="text-neutral-700">prompts</span>, share{" "}
           <span className="text-neutral-700">ideas</span>, and ignite the
           <span className="text-blue-500"> future of AI</span> together!
         </div>
         <Input
           className="w-2/3 md:w-[30rem] spark-form-search"
-          placeholder="Search"
+          placeholder="Search "
         />
         <h1 className="my-10">Feed</h1>
       </section>

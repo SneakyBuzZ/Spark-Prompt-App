@@ -208,7 +208,7 @@
     }
 
     .spark-form-search {
-        @apply border-none bg-neutral-100 shadow-md placeholder:text-neutral-400 placeholder:pl-5
+        @apply border-none shadow-md placeholder:text-neutral-400 bg-neutral-100
     }
 
     /* Nav Component */

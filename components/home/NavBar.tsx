@@ -5,6 +5,13 @@ import Image from "next/image";
 import { MuseoModerno } from "next/font/google";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import {
+  signIn,
+  signOut,
+  getProviders,
+  LiteralUnion,
+  ClientSafeProvider,
+} from "next-auth/react";
 
 import {
   DropdownMenu,
@@ -16,6 +23,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useEffect, useState } from "react";
+import { BuiltInProviderType } from "next-auth/providers/index";
 
 const museoModerno = MuseoModerno({
   subsets: ["latin"],
@@ -23,6 +32,20 @@ const museoModerno = MuseoModerno({
 
 const NavBar = () => {
   const isUserLoggedIn = true;
+
+  const [provider, setProvider] = useState<Record<
+    LiteralUnion<BuiltInProviderType, string>,
+    ClientSafeProvider
+  > | null>(null);
+
+  useEffect(() => {
+    const SetProvider = async () => {
+      const response = await getProviders();
+      setProvider(response);
+    };
+
+    SetProvider();
+  }, []);
 
   return (
     <>
@@ -52,17 +75,36 @@ const NavBar = () => {
                 <DropdownMenuContent className="border-none mx-5">
                   <DropdownMenuLabel>Menu</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Create Post</DropdownMenuItem>
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/create-post">Create Prompt</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    {provider &&
+                      Object.values(provider).map((provider) => (
+                        <Button
+                          key={provider.name}
+                          onClick={() => signIn(provider.id)}
+                        >
+                          Login
+                        </Button>
+                      ))}
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Button
-                variant="outline"
-                className="shadow-lg shadow-neutral-200 scale-75 md:scale-100 -mx-3 md:mx-0 hidden sm:flex"
-              >
-                Login
-              </Button>
+              {provider &&
+                Object.values(provider).map((provider) => (
+                  <Button
+                    key={provider.name}
+                    onClick={() => signIn(provider.id)}
+                    variant="outline"
+                    className="shadow-lg shadow-neutral-200 scale-75 md:scale-100 -mx-3 md:mx-0 hidden sm:flex"
+                  >
+                    Login
+                  </Button>
+                ))}
               <Button
                 className="shadow-lg shadow-neutral-200 scale-75 md:scale-100 hidden sm:flex"
                 variant={"default"}
