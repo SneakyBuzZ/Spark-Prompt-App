@@ -81,17 +81,15 @@ const NavBar = () => {
                   <DropdownMenuItem>
                     <Link href="/profile">Profile</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    {provider &&
-                      Object.values(provider).map((provider) => (
-                        <Button
-                          key={provider.name}
-                          onClick={() => signIn(provider.id)}
-                        >
-                          Login
-                        </Button>
-                      ))}
-                  </DropdownMenuItem>
+                  {provider &&
+                    Object.values(provider).map((provider) => (
+                      <DropdownMenuItem
+                        key={provider.name}
+                        onClick={() => signIn(provider.id)}
+                      >
+                        Login
+                      </DropdownMenuItem>
+                    ))}
                 </DropdownMenuContent>
               </DropdownMenu>
               {provider &&
