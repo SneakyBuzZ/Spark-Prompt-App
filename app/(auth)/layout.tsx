@@ -5,21 +5,20 @@ export const metadata = {
   description: "Discover and share your prompts",
 };
 
-interface RootLayoutType {
+interface AuthLayoutType {
   children: React.ReactNode;
 }
 
-const RootLayout = ({ children }: RootLayoutType) => {
+const AuthLayout = ({ children }: AuthLayoutType) => {
   return (
     <html lang="en">
       <body>
         <div className="main">
-          <div className="graident" />
-          <main className="app">{children}</main>
+          <main className="spark-app">{children}</main>
         </div>
       </body>
     </html>
   );
 };
 
-export default RootLayout;
+export default AuthLayout;

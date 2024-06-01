@@ -68,47 +68,31 @@ const NavBar = () => {
         <div className="spark-flex-row gap-3">
           {isUserLoggedIn ? (
             <>
+              <Button
+                variant="outline"
+                className="shadow-lg shadow-neutral-200 hidden md:flex"
+              >
+                Create Prompt
+              </Button>
+
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Menu color="#000000" className="flex sm:hidden" />
+                <DropdownMenuTrigger className="focus:outline-none">
+                  <Menu color="#000000" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="border-none mx-5">
+                <DropdownMenuContent className="border-none mx-5 bg-neutral-100">
                   <DropdownMenuLabel>Menu</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="sm:hidden">
                     <Link href="/create-post">Create Prompt</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Link href="/profile">Profile</Link>
                   </DropdownMenuItem>
-                  {provider &&
-                    Object.values(provider).map((provider) => (
-                      <DropdownMenuItem
-                        key={provider.name}
-                        onClick={() => signIn(provider.id)}
-                      >
-                        Login
-                      </DropdownMenuItem>
-                    ))}
+
+                  <DropdownMenuItem>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              {provider &&
-                Object.values(provider).map((provider) => (
-                  <Button
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    variant="outline"
-                    className="shadow-lg shadow-neutral-200 scale-75 md:scale-100 -mx-3 md:mx-0 hidden sm:flex"
-                  >
-                    Login
-                  </Button>
-                ))}
-              <Button
-                className="shadow-lg shadow-neutral-200 scale-75 md:scale-100 hidden sm:flex"
-                variant={"default"}
-              >
-                Register
-              </Button>
+
               <Avatar className="scale-90 sm:scale-125 sm:mx-3">
                 <AvatarImage className="" src="https://github.com/shadcn.png" />
                 <AvatarFallback>Profile</AvatarFallback>
@@ -117,16 +101,27 @@ const NavBar = () => {
           ) : (
             <>
               <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger className="focus:outline-none">
                   <Menu color="#000000" className="sm:flex md:hidden" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="border-none mx-5">
+                <DropdownMenuContent className="border-none mx-5 bg-neutral-100">
                   <DropdownMenuLabel>Menu</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Login</DropdownMenuItem>
                   <DropdownMenuItem>Register</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              {provider &&
+                Object.values(provider).map((provider) => (
+                  <Button
+                    key={provider.name}
+                    className="sm:hidden"
+                    onClick={() => signIn(provider.id)}
+                  >
+                    {provider.name}
+                  </Button>
+                ))}
 
               <Button
                 variant="outline"
