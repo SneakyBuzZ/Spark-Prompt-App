@@ -1,9 +1,19 @@
-const Rrgister = async () => {
+import { CardWrapper } from "@/components/card/CardWrapper";
+import { RegisterForm } from "@/components/form/RegisterForm";
+
+const Register = async () => {
   return (
     <>
-      <h1>REGISTER</h1>
+      <CardWrapper
+        backButtonLabel="Already have an account?"
+        backButtonHref="/login"
+        headerLabel="Register to create and save your prompts"
+        showSocials
+      >
+        <RegisterForm />
+      </CardWrapper>
     </>
   );
 };
 
-export default Rrgister;
+export default Register;

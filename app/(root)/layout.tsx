@@ -1,5 +1,6 @@
-import NavBar from "@components/home/NavBar";
+import NavBar from "@/components/home/NavBar";
 import { Inter } from "next/font/google";
+import "@/styles/globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,17 +17,11 @@ interface RootLayoutType {
 
 const RootLayout = ({ children }: RootLayoutType) => {
   return (
-    <html lang="en">
-      <body>
-        <div className={`${inter.className} main z-10`}>
-          <div className="gradient" />
-          <main className="spark-app w-full">
-            <NavBar />
-            {children}
-          </main>
-        </div>
-      </body>
-    </html>
+    <div className={`${inter.className} flex flex-col items-center z-10`}>
+      <div className="gradient" />
+      <NavBar />
+      {children}
+    </div>
   );
 };
 

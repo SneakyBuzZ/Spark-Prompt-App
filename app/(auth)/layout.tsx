@@ -1,4 +1,4 @@
-import "@styles/globals.css";
+import "@/styles/globals.css";
 
 export const metadata = {
   title: "Spark",
@@ -11,13 +11,10 @@ interface AuthLayoutType {
 
 const AuthLayout = ({ children }: AuthLayoutType) => {
   return (
-    <html lang="en">
-      <body>
-        <div className="main">
-          <main className="spark-app">{children}</main>
-        </div>
-      </body>
-    </html>
+    <div className={` z-10 h-screen flex flex-col  justify-center`}>
+      <div className="gradient"></div>
+      {children}
+    </div>
   );
 };
 

@@ -129,7 +129,7 @@
     height: 100%;
     filter: blur(100px) saturate(150%);
     top: 80px;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 @layer components {
@@ -162,6 +162,7 @@
     }
 
     /* ################## TEXT ################## */
+
     .head_text {
         @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
     }

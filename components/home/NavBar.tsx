@@ -1,17 +1,10 @@
 "use client";
 
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { MuseoModerno } from "next/font/google";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import {
-  signIn,
-  signOut,
-  getProviders,
-  LiteralUnion,
-  ClientSafeProvider,
-} from "next-auth/react";
 
 import {
   DropdownMenu,
@@ -22,31 +15,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { LoginButton } from "../auth/LoginButton";
+import RegisterButton from "../auth/RegisterButton";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useEffect, useState } from "react";
-import { BuiltInProviderType } from "next-auth/providers/index";
+import { useSession } from "next-auth/react";
 
 const museoModerno = MuseoModerno({
   subsets: ["latin"],
 });
 
 const NavBar = () => {
+  const { data: session } = useSession();
+  console.log("SESSION : ", session);
   const isUserLoggedIn = true;
-
-  const [provider, setProvider] = useState<Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null>(null);
-
-  useEffect(() => {
-    const SetProvider = async () => {
-      const response = await getProviders();
-      setProvider(response);
-    };
-
-    SetProvider();
-  }, []);
-
   return (
     <>
       <header className="spark-navbar">
@@ -107,34 +89,31 @@ const NavBar = () => {
                 <DropdownMenuContent className="border-none mx-5 bg-neutral-100">
                   <DropdownMenuLabel>Menu</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Login</DropdownMenuItem>
-                  <DropdownMenuItem>Register</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <LoginButton>Login</LoginButton>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <RegisterButton>Register</RegisterButton>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {provider &&
-                Object.values(provider).map((provider) => (
-                  <Button
-                    key={provider.name}
-                    className="sm:hidden"
-                    onClick={() => signIn(provider.id)}
-                  >
-                    {provider.name}
-                  </Button>
-                ))}
-
-              <Button
-                variant="outline"
-                className="shadow-lg shadow-neutral-200 hidden md:flex"
-              >
-                Login
-              </Button>
-              <Button
-                className="shadow-lg shadow-neutral-200 hidden md:flex"
-                variant={"default"}
-              >
-                Register
-              </Button>
+              <LoginButton>
+                <Button
+                  variant="outline"
+                  className="shadow-lg shadow-neutral-200 hidden md:flex"
+                >
+                  Login
+                </Button>
+              </LoginButton>
+              <RegisterButton>
+                <Button
+                  className="shadow-lg shadow-neutral-200 hidden md:flex"
+                  variant={"default"}
+                >
+                  Register
+                </Button>
+              </RegisterButton>
             </>
           )}
         </div>

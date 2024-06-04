@@ -1,7 +1,16 @@
+import { CardWrapper } from "@/components/card/CardWrapper";
+import { LoginForm } from "@/components/form/LoginForm";
+
 const Login = async () => {
   return (
     <>
-      <h1>LOGIN</h1>
+      <CardWrapper
+        backButtonHref="/register"
+        backButtonLabel="Do not have an account?"
+        headerLabel="Please login with your credentials"
+      >
+        <LoginForm />
+      </CardWrapper>
     </>
   );
 };
