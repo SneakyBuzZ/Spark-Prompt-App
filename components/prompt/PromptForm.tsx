@@ -20,10 +20,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreatePromptQuery } from "@/lib/query/mutations";
 import { useToast } from "@/components/ui/use-toast";
 import { MoonLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 function PromptForm() {
+  const router = useRouter();
+  const session = useSession();
   const { mutateAsync: createPrompt, isPending } = useCreatePromptQuery();
   const { toast } = useToast();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (session) {
+      setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
+    }
+  }, []);
+
   const form = useForm<z.infer<typeof promptSchema>>({
     resolver: zodResolver(promptSchema),
     defaultValues: {
@@ -49,7 +64,8 @@ function PromptForm() {
       });
     }
 
-    values.content = "";
+    router.push("/about");
+    router.push("/");
   }
   return (
     <>
@@ -84,6 +100,7 @@ function PromptForm() {
                 />
                 <Button
                   type="submit"
+                  disabled={isUserLoggedIn || isPending}
                   className="space-x-1 h-8 w-24 bg-blue-400 hover:bg-blue-500"
                 >
                   {isPending ? (

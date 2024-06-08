@@ -3,6 +3,8 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import QueryProvider from "@/lib/query/Provider";
 
+import { Toaster } from "@/components/ui/toaster";
+
 const inter = Inter({
   subsets: ["latin"],
 });
@@ -27,6 +29,7 @@ const AppLayout = ({ children }: AppLayoutType) => {
                 {children}
               </main>
             </div>
+            <Toaster />
           </QueryProvider>
         </Provider>
       </body>

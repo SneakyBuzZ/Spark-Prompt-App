@@ -23,6 +23,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
 import useUserStore from "@/lib/zustand/userStore";
+import { useToast } from "../ui/use-toast";
 
 export const LoginForm = () => {
   const params = useSearchParams();
@@ -34,6 +35,7 @@ export const LoginForm = () => {
   const { mutateAsync: loginAction, isPending } = useLoginQuery();
   const [success, setSuccess] = useState("");
   const [error, SetError] = useState("");
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -49,6 +51,10 @@ export const LoginForm = () => {
       return;
     } else if (response?.message) {
       setSuccess(response.message);
+      toast({
+        variant: "default",
+        description: `${response.message}`,
+      });
       return;
     }
   }

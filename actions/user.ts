@@ -5,7 +5,7 @@ import { db } from "@/utils/db";
 import * as z from "zod";
 import { getUserByEmail } from "@/actions/getData";
 import bcryptjs from "bcryptjs";
-import { signIn } from "@/authentication/auth";
+import { signIn, signOut } from "@/authentication/auth";
 import { defaultLoginRedirect } from "@/utils/route";
 import { AuthError } from "next-auth";
 
@@ -115,4 +115,8 @@ export const loginUserAction = async (user: z.infer<typeof loginSchema>) => {
 
     throw error;
   }
+};
+
+export const logoutAction = async () => {
+  await signOut();
 };

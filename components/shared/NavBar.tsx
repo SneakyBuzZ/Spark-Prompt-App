@@ -19,13 +19,19 @@ import { LoginButton } from "../auth/LoginButton";
 import RegisterButton from "../auth/RegisterButton";
 
 import UserAvatar from "@/components/shared/UserAvatar";
+import { LogoutButton } from "../auth/LogoutButton";
+import { signOut } from "@/authentication/auth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const museoModerno = MuseoModerno({
   subsets: ["latin"],
 });
 
 const NavBar = () => {
-  const isUserLoggedIn = true;
+  const router = useRouter();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+
   return (
     <>
       <header className="spark-navbar">
@@ -50,6 +56,10 @@ const NavBar = () => {
               <Button
                 variant="default"
                 className="shadow-lg shadow-neutral-200 hidden md:flex"
+                onClick={async () => {
+                  router.push("/login");
+                  await signOut();
+                }}
               >
                 Logout
               </Button>
@@ -65,7 +75,7 @@ const NavBar = () => {
                     <LoginButton>Create Post</LoginButton>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <RegisterButton>Logout</RegisterButton>
+                    <LogoutButton>Logout</LogoutButton>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
