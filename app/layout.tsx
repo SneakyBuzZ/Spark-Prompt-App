@@ -23,7 +23,9 @@ const AppLayout = ({ children }: AppLayoutType) => {
         <Provider>
           <QueryProvider>
             <div className={`${inter.className} main`}>
-              <main className="spark-app w-full ">{children}</main>
+              <main className="spark-app w-full overflow-y-hidden">
+                {children}
+              </main>
             </div>
           </QueryProvider>
         </Provider>

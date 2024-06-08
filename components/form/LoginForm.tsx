@@ -22,6 +22,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
+import useUserStore from "@/lib/zustand/userStore";
 
 export const LoginForm = () => {
   const params = useSearchParams();

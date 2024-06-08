@@ -12,3 +12,18 @@ export interface UserRegister {
 export interface UserResetPassword {
   email: string;
 }
+
+export interface CreatePrompt {
+  content: string;
+}
+
+export interface GetAllPrompt {
+  user: {
+    name: string | null;
+    image: string | null;
+  };
+  id: string;
+  content: string;
+  userId: string;
+  createdAt: Date;
+}

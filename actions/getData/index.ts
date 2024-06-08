@@ -1,3 +1,4 @@
+"use server";
 import { db } from "@/utils/db";
 
 //* GET USER BY EMAIL
@@ -48,6 +49,39 @@ export const getUserById = async (id: string) => {
     return {
       status: 500,
       error: "Failed to get user by id. Please try again",
+    };
+  }
+};
+
+// * GET ALL PROMPT
+
+export const getAllPrompt = async (take: number) => {
+  try {
+    const prompts = await db.prompt.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
+      take: take,
+      skip: 0,
+    });
+
+    return {
+      status: 200,
+      prompts,
+    };
+  } catch (error) {
+    console.log("Error: ", error);
+    return {
+      status: 500,
+      error: "Failed to get prompts. Please try again",
     };
   }
 };

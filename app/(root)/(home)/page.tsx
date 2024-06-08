@@ -1,5 +1,6 @@
 import { Passion_One } from "next/font/google";
 import { Input } from "@/components/ui/input";
+import PromptFeed from "@/components/prompt/PromptFeed";
 
 const passion_one = Passion_One({
   subsets: ["latin-ext"],
@@ -20,10 +21,12 @@ const Home = () => {
           <span className="text-blue-500"> future of AI</span> together!
         </div>
         <Input
-          className="w-2/3 md:w-[30rem] spark-form-search"
+          className="w-2/3 md:w-[30rem] spark-form-search glassmorphic"
           placeholder="Search "
         />
-        <h1 className="my-10">Feed</h1>
+        <div className="w-full">
+          <PromptFeed />
+        </div>
       </section>
     </>
   );

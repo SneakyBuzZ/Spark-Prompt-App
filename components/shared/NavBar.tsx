@@ -18,16 +18,13 @@ import {
 import { LoginButton } from "../auth/LoginButton";
 import RegisterButton from "../auth/RegisterButton";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useSession } from "next-auth/react";
+import UserAvatar from "@/components/shared/UserAvatar";
 
 const museoModerno = MuseoModerno({
   subsets: ["latin"],
 });
 
 const NavBar = () => {
-  const { data: session } = useSession();
-  console.log("SESSION : ", session);
   const isUserLoggedIn = true;
   return (
     <>
@@ -51,34 +48,29 @@ const NavBar = () => {
           {isUserLoggedIn ? (
             <>
               <Button
-                variant="outline"
+                variant="default"
                 className="shadow-lg shadow-neutral-200 hidden md:flex"
               >
-                Create Prompt
+                Logout
               </Button>
 
               <DropdownMenu>
                 <DropdownMenuTrigger className="focus:outline-none">
-                  <Menu color="#000000" />
+                  <Menu color="#000000" className="sm:flex md:hidden" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border-none mx-5 bg-neutral-100">
                   <DropdownMenuLabel>Menu</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="sm:hidden">
-                    <Link href="/create-post">Create Prompt</Link>
+                  <DropdownMenuItem>
+                    <LoginButton>Create Post</LoginButton>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href="/profile">Profile</Link>
+                    <RegisterButton>Logout</RegisterButton>
                   </DropdownMenuItem>
-
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Avatar className="scale-90 sm:scale-125 sm:mx-3">
-                <AvatarImage className="" src="https://github.com/shadcn.png" />
-                <AvatarFallback>Profile</AvatarFallback>
-              </Avatar>
+              <UserAvatar />
             </>
           ) : (
             <>

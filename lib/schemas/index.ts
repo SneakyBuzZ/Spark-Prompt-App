@@ -27,3 +27,7 @@ export const resetPasswordSchema = z.object({
   }),
   confirmedPassword: z.string(),
 });
+
+export const promptSchema = z.object({
+  content: z.string().min(2),
+});

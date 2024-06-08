@@ -1,4 +1,4 @@
-import NavBar from "@/components/home/NavBar";
+import NavBar from "@/components/shared/NavBar";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 
@@ -17,7 +17,7 @@ interface RootLayoutType {
 
 const RootLayout = ({ children }: RootLayoutType) => {
   return (
-    <div className={`${inter.className} flex flex-col items-center z-10`}>
+    <div className={`${inter.className} flex flex-col items-center z-10 `}>
       <div className="gradient" />
       <NavBar />
       {children}
