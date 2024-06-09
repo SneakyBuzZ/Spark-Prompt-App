@@ -9,9 +9,12 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  pages: {
+    signIn: "/login",
+    error: "/error",
+  },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("Inside signin");
       if (account?.provider !== "credentials") return false;
 
       if (!user.id) return false;

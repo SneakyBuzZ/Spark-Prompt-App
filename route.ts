@@ -1,5 +1,5 @@
 //* All public routes
-export const publicRoutes = ["/", "/new-verification"];
+export const publicRoutes = ["/", "/new-verification", "/session"];
 
 //* All auth routes
 export const authRoutes = [

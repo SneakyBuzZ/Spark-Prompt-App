@@ -58,7 +58,7 @@ export const loginUserAction = async (user: z.infer<typeof loginSchema>) => {
   if (!validatedFields.success) {
     return {
       status: 400,
-      message: "Validation failed",
+      error: "Validation failed",
     };
   }
 
@@ -69,7 +69,7 @@ export const loginUserAction = async (user: z.infer<typeof loginSchema>) => {
   if (!existingUser || !existingUser.password || !existingUser.password) {
     return {
       status: 400,
-      message: "User does not exist",
+      error: "User does not exist",
     };
   }
 
@@ -81,7 +81,7 @@ export const loginUserAction = async (user: z.infer<typeof loginSchema>) => {
   if (!isPasswordCorrect) {
     return {
       status: 400,
-      message: "Incorrect password",
+      error: "Incorrect password",
     };
   }
 
@@ -118,5 +118,7 @@ export const loginUserAction = async (user: z.infer<typeof loginSchema>) => {
 };
 
 export const logoutAction = async () => {
-  await signOut();
+  await signOut({
+    redirectTo: "/login",
+  });
 };

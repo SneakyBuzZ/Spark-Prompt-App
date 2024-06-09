@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/authentication/auth";
 import { db } from "@/utils/db";
 
 //* GET USER BY EMAIL
