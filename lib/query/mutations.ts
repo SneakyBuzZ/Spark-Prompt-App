@@ -3,8 +3,8 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { loginUserAction, registerUserAction } from "@/actions/user";
-import { CreatePrompt, UserLogin, UserRegister } from "@/lib/types";
-import { createAction } from "@/actions/prompt";
+import { CreatePrompt, EditPrompt, UserLogin, UserRegister } from "@/lib/types";
+import { createAction, editPromptAction } from "@/actions/prompt";
 import { getAllPrompt } from "@/actions/getData";
 
 // * ################ USER ######################
@@ -26,6 +26,12 @@ export const useRegisterQuery = () => {
 export const useCreatePromptQuery = () => {
   return useMutation({
     mutationFn: (prompt: CreatePrompt) => createAction(prompt),
+  });
+};
+
+export const useEditPromptQuery = () => {
+  return useMutation({
+    mutationFn: (prompt: EditPrompt) => editPromptAction(prompt),
   });
 };
 

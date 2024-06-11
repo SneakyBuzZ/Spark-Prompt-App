@@ -8,6 +8,7 @@ const Login = async () => {
         backButtonHref="/register"
         backButtonLabel="Do not have an account?"
         headerLabel="Please login with your credentials"
+        showSocials
       >
         <LoginForm />
       </CardWrapper>

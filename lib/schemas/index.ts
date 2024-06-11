@@ -31,3 +31,7 @@ export const resetPasswordSchema = z.object({
 export const promptSchema = z.object({
   content: z.string().min(2),
 });
+
+export const editPromptSchema = z.object({
+  content: z.string().min(2),
+});

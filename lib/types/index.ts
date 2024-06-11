@@ -17,6 +17,11 @@ export interface CreatePrompt {
   content: string;
 }
 
+export interface EditPrompt {
+  content: string;
+  promptId: string;
+}
+
 export interface GetAllPrompt {
   user: {
     name: string | null;

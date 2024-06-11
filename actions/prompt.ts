@@ -2,6 +2,7 @@
 
 import { auth } from "@/authentication/auth";
 import { promptSchema } from "@/lib/schemas";
+import { EditPrompt } from "@/lib/types";
 import { db } from "@/utils/db";
 import * as z from "zod";
 
@@ -37,5 +38,28 @@ export const createAction = async (prompt: z.infer<typeof promptSchema>) => {
   return {
     status: 200,
     message: "Prompt created successfully",
+  };
+};
+
+export const editPromptAction = async (prompt: EditPrompt) => {
+  if (!prompt || !prompt.promptId || !prompt.promptId) {
+    return {
+      status: 400,
+      error: "id and content are required",
+    };
+  }
+
+  await db.prompt.update({
+    where: {
+      id: prompt.promptId,
+    },
+    data: {
+      content: prompt.content,
+    },
+  });
+
+  return {
+    status: 200,
+    message: "Prompt updated successfully",
   };
 };

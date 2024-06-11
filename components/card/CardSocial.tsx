@@ -7,8 +7,8 @@ import { signIn } from "next-auth/react";
 import { defaultLoginRedirect } from "@/route";
 
 export const CardSocial = () => {
-  const handleClick = (provider: "google" | "github") => {
-    signIn(provider, {
+  const handleOAuth = async (provider: "google" | "github") => {
+    await signIn(provider, {
       callbackUrl: defaultLoginRedirect,
     });
   };
@@ -16,14 +16,14 @@ export const CardSocial = () => {
     <>
       <div className="flex items-center w-full gap-x-2">
         <Button
-          onClick={() => handleClick("google")}
+          onClick={() => handleOAuth("google")}
           variant="outline"
           className="w-full"
         >
           <FcGoogle size={20} />
         </Button>
         <Button
-          onClick={() => handleClick("github")}
+          onClick={() => handleOAuth("github")}
           variant="outline"
           className="w-full"
         >

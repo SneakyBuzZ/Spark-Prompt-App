@@ -1,10 +1,12 @@
-import { auth } from "@/authentication/auth";
+"use client";
 
-const page = async () => {
-  const session = await auth();
+import { useSession } from "next-auth/react";
+
+const page = () => {
+  const { data: session } = useSession();
   return (
     <>
-      <h1>NAME : {session?.user?.name}</h1>
+      <h1>NAME : {session?.user?.id}</h1>
       <h1>ID : </h1>
     </>
   );

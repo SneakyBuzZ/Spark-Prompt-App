@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import QueryProvider from "@/lib/query/Provider";
 
 import { Toaster } from "@/components/ui/toaster";
+import { useEffect } from "react";
 
 const inter = Inter({
   subsets: ["latin"],

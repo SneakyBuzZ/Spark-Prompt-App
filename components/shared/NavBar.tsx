@@ -28,8 +28,6 @@ const museoModerno = MuseoModerno({
 
 const NavBar = () => {
   const { status } = useSession();
-  // console.log("STATUS: ", status);
-  // console.log("NAVBAR DATA: ", data);
   return (
     <>
       <SessionProvider>
