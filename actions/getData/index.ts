@@ -86,3 +86,21 @@ export const getAllPrompt = async (take: number) => {
     };
   }
 };
+
+//* GET USER PROMPT NUMBER
+export const getUserPromptCount = async (userId: string) => {
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const count = await db.prompt.count({
+    where: {
+      userId,
+    },
+  });
+
+  return {
+    status: 200,
+    count,
+  };
+};

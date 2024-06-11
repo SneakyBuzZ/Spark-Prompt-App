@@ -63,3 +63,20 @@ export const editPromptAction = async (prompt: EditPrompt) => {
     message: "Prompt updated successfully",
   };
 };
+
+export const deletePromptAction = async (promptId: string) => {
+  if (!promptId) {
+    throw new Error("Prompt is required");
+  }
+
+  await db.prompt.delete({
+    where: {
+      id: promptId,
+    },
+  });
+
+  return {
+    status: 200,
+    message: "Prompt deleted successfully",
+  };
+};

@@ -4,7 +4,11 @@ import { useMutation } from "@tanstack/react-query";
 
 import { loginUserAction, registerUserAction } from "@/actions/user";
 import { CreatePrompt, EditPrompt, UserLogin, UserRegister } from "@/lib/types";
-import { createAction, editPromptAction } from "@/actions/prompt";
+import {
+  createAction,
+  deletePromptAction,
+  editPromptAction,
+} from "@/actions/prompt";
 import { getAllPrompt } from "@/actions/getData";
 
 // * ################ USER ######################
@@ -38,5 +42,10 @@ export const useEditPromptQuery = () => {
 export const useGetAllPromptQuery = () => {
   return useMutation({
     mutationFn: (take: number) => getAllPrompt(take),
+  });
+};
+export const useDeletePromptQuery = () => {
+  return useMutation({
+    mutationFn: (promptId: string) => deletePromptAction(promptId),
   });
 };

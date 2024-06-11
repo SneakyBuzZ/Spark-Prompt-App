@@ -1,6 +1,7 @@
 "use client";
 import PromptForm from "@/components/prompt/PromptForm";
 import {
+  useDeletePromptQuery,
   useEditPromptQuery,
   useGetAllPromptQuery,
 } from "@/lib/query/mutations";
@@ -15,14 +16,27 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
 import { MoonLoader } from "react-spinners";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 function PromptFeed() {
   const { toast } = useToast();
   const { data } = useSession();
   const { mutateAsync: getAllPrompt, isPending } = useGetAllPromptQuery();
   const { mutateAsync: editPrompt, isPending: isPromptEditing } =
     useEditPromptQuery();
-  const [prompt, setPrompt] = useState<GetAllPrompt[] | null>();
+  const { mutateAsync: deletePrompt } = useDeletePromptQuery();
 
+  const [prompt, setPrompt] = useState<GetAllPrompt[] | null>();
   const [showPromptEdit, setShowPromptEdit] = useState(false);
   const [editContent, setEditContent] = useState("");
   const [editPromptId, setEditPromptId] = useState("");
@@ -41,9 +55,19 @@ function PromptFeed() {
       });
     }
 
-    // window.location.reload();
     setEditContent("");
     setShowPromptEdit(false);
+  };
+
+  const handleDeletePrompt = async (promptId: string) => {
+    const response = await deletePrompt(promptId);
+    if (response.status === 200) {
+      toast({
+        variant: "default",
+        description: `${response.message}`,
+      });
+    }
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -88,7 +112,7 @@ function PromptFeed() {
                         value={editContent || each.content}
                         className="mt-6 pl-2 text-base text-gray-600 min-h-40 bg-transparent"
                       />
-                      <div className="w-full flex justify-end mt-2">
+                      <div className="w-full flex justify-end mt-2 gap-2">
                         <Button
                           onClick={() => handleEditPrompt(each.id)}
                           className=" h-8 w-16 bg-blue-400 hover:bg-blue-500"
@@ -98,6 +122,12 @@ function PromptFeed() {
                           ) : (
                             <>edit</>
                           )}
+                        </Button>
+                        <Button
+                          className="h-8 w-16 bg-rose-400 hover:bg-rose-500"
+                          onClick={() => setShowPromptEdit(false)}
+                        >
+                          cancel
                         </Button>
                       </div>
                     </>
@@ -124,11 +154,35 @@ function PromptFeed() {
                               className="cursor-pointer"
                               color="#3F3F3F"
                             />
-                            <Trash2
-                              height={18}
-                              className="cursor-pointer"
-                              color="#3F3F3F"
-                            />
+                            <AlertDialog>
+                              <AlertDialogTrigger>
+                                <Trash2
+                                  height={18}
+                                  className="cursor-pointer"
+                                  color="#3F3F3F"
+                                />
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>
+                                    Are you absolutely sure?
+                                  </AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    This action cannot be undone. This will
+                                    permanently delete your prompt and content
+                                    from it.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() => handleDeletePrompt(each.id)}
+                                  >
+                                    Continue
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </>
                       )}
