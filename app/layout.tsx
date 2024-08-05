@@ -22,6 +22,9 @@ interface AppLayoutType {
 const AppLayout = ({ children }: AppLayoutType) => {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/assets/images/spark_logo.png" />
+      </head>
       <body>
         <Provider>
           <QueryProvider>
