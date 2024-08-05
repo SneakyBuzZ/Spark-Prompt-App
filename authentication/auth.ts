@@ -3,12 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/utils/db";
 import authConfig from "@/authentication/auth.config";
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     error: "/error",
   },

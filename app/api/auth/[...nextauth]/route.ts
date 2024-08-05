@@ -1,7 +1,2 @@
-// export * from "@/authentication/auth";
-
-// import { GET, POST } from "@/authentication/auth";
-
-// export { GET, POST };
-
-export {};
+import { handlers } from "@/authentication/auth"; // Referring to the auth.ts we just created
+export const { GET, POST } = handlers;
