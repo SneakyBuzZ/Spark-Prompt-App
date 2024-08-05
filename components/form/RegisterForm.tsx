@@ -63,6 +63,7 @@ export const RegisterForm = () => {
                 <FormLabel className="text-neutral-600">email</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={true}
                     className="bg-neutral-100"
                     placeholder="johndoe@gmail.com"
                     {...field}
@@ -79,6 +80,7 @@ export const RegisterForm = () => {
                 <FormLabel className="text-neutral-600">name</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={true}
                     className="bg-neutral-100"
                     placeholder="John Doe"
                     {...field}
@@ -95,6 +97,7 @@ export const RegisterForm = () => {
                 <FormLabel className="text-neutral-600">password</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={true}
                     type="password"
                     className="bg-neutral-100 "
                     placeholder="*******"
@@ -108,6 +111,7 @@ export const RegisterForm = () => {
           <FormSuccess label={success} />
           <Button
             type="submit"
+            disabled={true}
             className="w-full bg-gradient-to-r from-blue-700 to-blue-500"
           >
             {isPending ? (

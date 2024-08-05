@@ -7,7 +7,7 @@ const Register = async () => {
       <CardWrapper
         backButtonLabel="Already have an account?"
         backButtonHref="/login"
-        headerLabel="Register to create and save your prompts"
+        headerLabel="Credential authentication is not yet available please use Google or Github"
         showSocials
       >
         <RegisterForm />

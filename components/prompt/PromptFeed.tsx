@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 function PromptFeed() {
+  let DEFAULT_POSTS = 10;
   const { toast } = useToast();
   const { data } = useSession();
   const { mutateAsync: getAllPrompt, isPending } = useGetAllPromptQuery();
@@ -71,10 +72,17 @@ function PromptFeed() {
   };
 
   useEffect(() => {
-    getAllPrompt(10).then((response) => {
+    getAllPrompt(DEFAULT_POSTS).then((response) => {
       setPrompt(response.prompts);
     });
   }, [data, editContent]);
+
+  const loadMore = async () => {
+    DEFAULT_POSTS += 10;
+    getAllPrompt(DEFAULT_POSTS).then((response) => {
+      setPrompt(response.prompts);
+    });
+  };
 
   return (
     <>
@@ -87,7 +95,7 @@ function PromptFeed() {
               <div className="absolute -inset-1">
                 <div className="w-full h-full rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-blue-400/90 via-rose-500 to-green-600/50"></div>
               </div>
-              <div className="border border-neutral-300 relative overflow-hidden bg-white/80 shadow-md rounded-xl h-full flex flex-col justify-between ">
+              <div className=" relative overflow-hidden bg-white/80 shadow-md rounded-md h-full flex flex-col justify-between ">
                 <div className="p-9">
                   <div className="flex items-center gap-2">
                     <Avatar className="scale-90 sm:scale-125 sm:mx-3">
@@ -218,6 +226,9 @@ function PromptFeed() {
           ) : (
             <></>
           )}
+        </div>
+        <div className="w-full flex justify-center mt-10">
+          <Button onClick={loadMore}>Load More</Button>
         </div>
       </section>
     </>

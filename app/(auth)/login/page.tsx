@@ -7,7 +7,7 @@ const Login = async () => {
       <CardWrapper
         backButtonHref="/register"
         backButtonLabel="Do not have an account?"
-        headerLabel="Please login with your credentials"
+        headerLabel="Credential authentication is not yet available please use Google or Github"
         showSocials
       >
         <LoginForm />

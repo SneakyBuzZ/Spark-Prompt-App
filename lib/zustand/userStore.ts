@@ -52,6 +52,7 @@ const userSlice: StateCreator<userSliceType, [], [], userSliceType> = (
         email: user.email,
         image: user.image,
       },
+      isUserLoggedIn: true,
     }));
   },
   reset: () => {

@@ -71,7 +71,7 @@ export const LoginForm = () => {
                 <Input
                   placeholder="johndoe@gmail.com"
                   className="bg-neutral-100"
-                  disabled={isPending}
+                  disabled={true}
                   {...field}
                 />
               </FormControl>
@@ -88,13 +88,14 @@ export const LoginForm = () => {
                 <Input
                   placeholder="*******"
                   className="bg-neutral-100"
-                  disabled={isPending}
+                  disabled={true}
                   type="password"
                   {...field}
                 />
               </FormControl>
               <Button
                 asChild
+                disabled={true}
                 variant={"link"}
                 className="-translate-x-3 "
                 size={"sm"}
