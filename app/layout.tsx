@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import QueryProvider from "@/lib/query/Provider";
 
 import { Toaster } from "@/components/ui/toaster";
-import { useEffect } from "react";
+import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,16 +26,18 @@ const AppLayout = ({ children }: AppLayoutType) => {
         <link rel="icon" href="/assets/images/spark_logo.png" />
       </head>
       <body>
-        <Provider>
-          <QueryProvider>
-            <div className={`${inter.className} main`}>
-              <main className="spark-app w-full overflow-y-hidden">
-                {children}
-              </main>
-            </div>
-            <Toaster />
-          </QueryProvider>
-        </Provider>
+        <Suspense>
+          <Provider>
+            <QueryProvider>
+              <div className={`${inter.className} main`}>
+                <main className="spark-app w-full overflow-y-hidden">
+                  {children}
+                </main>
+              </div>
+              <Toaster />
+            </QueryProvider>
+          </Provider>
+        </Suspense>
       </body>
     </html>
   );
